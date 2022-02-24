@@ -1,57 +1,38 @@
-var extraer = document.getElementById("extraer");
-extraer.addEventListener("click", entregarDinero);
+var texto = document.getElementById("texto");
+var dinero = 110;
+
+
+var enviar = document.getElementById("button");
+enviar.addEventListener("click", extraerDinero);
+
+function extraerDinero()
+{
+   for(bi of caja)
+   {
+       if(dinero > 0)
+       {
+           div = Math.floor(dinero / bi.valor);
+           if(div <= bi.valor * bi.cantidad)
+           {
+               dinero = dinero - (div * bi.valor);
+               console.log(dinero);
+           }
+       }
+   }
+}
 
 class Billete
 {
-    constructor(c, v)
+    constructor(valor, cantidad)
     {
-        this.cantidad = c;
-        this.valor = v;
+        this.valor = valor;
+        this.cantidad = cantidad;
     }
 }
 
-function entregarDinero()
-{
-    for(var bi of caja)
-    {
-        var t = document.getElementById("dinero");
-        dinero = parseInt(t.value);
-        if(dinero > 0)
-        {
-            div = Math.floor(dinero / bi.valor);
-            if(div > bi.cantidad)
-            {
-                papeles = bi.cantidad;
-            }
-            else 
-            {
-                papeles = div;
-            }
+var caja = []
 
-            entregado.push(new Billete(papeles, bi.valor));
-            dinero = dinero - (bi.valor * papeles);
-        }
-
-
-        if(dinero > 0)
-        {
-            console.log("No tengo suficiente dinero");
-        }
-    }
-
-
-    console.log(entregado);
-}
-
-
-var entregado = []; /* array de los billetes entregados */
-var caja = []; /* array de los billetes disponibles */
-
-caja.push(new Billete(20,50));
-caja.push(new Billete(20,20));
-caja.push(new Billete(100,10));
-
-var dinero;/*dinero solicitado */
-var div = 0;
-var papeles = 0;
+caja.push(new Billete(50,2));
+caja.push(new Billete(20,2));
+caja.push(new Billete(10,2));
 

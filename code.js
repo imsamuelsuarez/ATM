@@ -1,5 +1,5 @@
 var texto = document.getElementById("texto");
-var dinero = 110;
+var dinero = parseInt(texto.value);
 
 
 var enviar = document.getElementById("button");
@@ -12,13 +12,23 @@ function extraerDinero()
        if(dinero > 0)
        {
            div = Math.floor(dinero / bi.valor);
-           if(div <= bi.valor * bi.cantidad)
+          
+           if(div > bi.cantidad)
            {
-               dinero = dinero - (div * bi.valor);
-               console.log(dinero);
+               papeles = bi.cantidad;
            }
-       }
-   }
+           else
+           {
+               papeles = div
+           }
+           entregados.push(new Billete(bi.valor, papeles));
+           dinero = dinero - (bi.valor * papeles);
+        }   
+        if(dinero == 0)
+        {
+            console.log(entregados);
+        }  
+    }
 }
 
 class Billete
@@ -36,3 +46,4 @@ caja.push(new Billete(50,2));
 caja.push(new Billete(20,2));
 caja.push(new Billete(10,2));
 
+var entregados = []

@@ -1,6 +1,11 @@
 var extraer = document.getElementById("extraer");
 extraer.addEventListener("click", entregarDinero);
 
+var text = document.getElementById("text");
+var dinero = text.value;
+
+var resultado = document.getElementById("resultado")
+
 class Billete
 {
     constructor(c, v)
@@ -12,46 +17,57 @@ class Billete
 
 function entregarDinero()
 {
-    for(var bi of caja)
+   for(bi of caja)
     {
-        var t = document.getElementById("dinero");
-        dinero = parseInt(t.value);
-        if(dinero > 0)
-        {
+       if(dinero > 0)
+       {
+           // aca se saca la cuenta de la caja, se hacen todas las operaciones //
             div = Math.floor(dinero / bi.valor);
+
             if(div > bi.cantidad)
-            {
-                papeles = bi.cantidad;
-            }
-            else 
-            {
-                papeles = div;
-            }
+             {
+                 papeles = bi.cantidad;
+             }
 
-            entregado.push(new Billete(papeles, bi.valor));
-            dinero = dinero - (bi.valor * papeles);
-        }
+             else
+             {
+                 papeles = div;
+             }
+             entregado.push(new Billete(bi.valor, papeles));
+             dinero = dinero - (bi.valor * papeles);
+            console.log(entregado);
+        }     
+     }
 
+     if(dinero > 0)
+     {
+         resultado.innerHTML = "No puedo darte esa cantidad";
+     }
+     else 
+     {
+         for(e of entregado)
+         {
+             if(e.cantidad > 0)
+             {
+                resultado.innerHTML += e.cantidad + " billetes de $" + e.valor + "<br />";
+             }
+         }
+     }
 
-        if(dinero > 0)
-        {
-            console.log("No tengo suficiente dinero");
-        }
-    }
-
-
-    console.log(entregado);
 }
+     
 
 
 var entregado = []; /* array de los billetes entregados */
 var caja = []; /* array de los billetes disponibles */
 
-caja.push(new Billete(20,50));
-caja.push(new Billete(20,20));
-caja.push(new Billete(100,10));
+caja.push(new Billete(5,100));
+caja.push(new Billete(10,50));
+caja.push(new Billete(5,20));
+caja.push(new Billete(10,10));
+caja.push(new Billete(10,5));
 
-var dinero;/*dinero solicitado */
-var div = 0;
-var papeles = 0;
+
+var div;
+var papeles;
 
